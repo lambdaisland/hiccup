@@ -23,9 +23,9 @@
     (vector? node-spec)
     (let [[tag & [m & ms :as more]] node-spec]
       (cond
-        (= ::raw tag)
+        (= ::unsafe-html tag)
         ^{::enlive/annotations {:emit (fn [_ t] (apply enlive/append! t more))}}
-        {:tag ::raw
+        {:tag ::unsafe-html
          :content more}
 
         (= :<> tag)
