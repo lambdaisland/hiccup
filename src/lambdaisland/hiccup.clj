@@ -23,6 +23,11 @@
     (vector? node-spec)
     (let [[tag & [m & ms :as more]] node-spec]
       (cond
+        (= ::raw tag)
+        ^{::enlive/annotations {:emit (fn [_ t] (apply enlive/append! t more))}}
+        {:tag ::raw
+         :content more}
+
         (= :<> tag)
         (enlive/flatmap #(nodify % opts) more)
 
