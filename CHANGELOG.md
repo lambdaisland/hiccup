@@ -1,3 +1,11 @@
+# Unreleased
+
+## Added
+
+## Fixed
+
+## Changed
+
 # 0.0.4 (2021-10-28 / 8c0198a)
 
 ## Added
