@@ -11,4 +11,4 @@
 
   :test
   {:extra-paths ["test"]
-   :extra-deps  {lambdaisland/kaocha {:mvn/version "1.0.861"}}}}}
+   :extra-deps  {lambdaisland/kaocha {:mvn/version "1.60.945"}}}}}
