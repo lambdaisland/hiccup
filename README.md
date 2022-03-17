@@ -12,7 +12,7 @@ Enlive-backed Hiccup implementation (clj-only)
 - Fragments (`[:<> ...]`)
 - Components (`[my-fn ...]`)
 - Style maps (`[:div {:style {:color "blue"}}]`)
-- Insert pre-rendered HTML with `[::hiccup/raw "your html"]`
+- Insert pre-rendered HTML with `[::hiccup/unsafe-html "your html"]`
 
 This makes it behave closer to how Hiccup works in Reagent, reducing cognitive
 overhead when doing cross-platform development.
