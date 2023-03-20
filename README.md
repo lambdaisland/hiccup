@@ -1,7 +1,7 @@
 # hiccup
 
 <!-- badges -->
-[![cljdoc badge](https://cljdoc.org/badge/com.lambdaisland/hiccup)](https://cljdoc.org/d/com.lambdaisland/hiccup) [![Clojars Project](https://img.shields.io/clojars/v/com.lambdaisland/hiccup.svg)](https://clojars.org/com.lambdaisland/hiccup)
+[![CircleCI](https://circleci.com/gh/lambdaisland/hiccup.svg?style=svg)](https://circleci.com/gh/lambdaisland/hiccup) [![cljdoc badge](https://cljdoc.org/badge/com.lambdaisland/hiccup)](https://cljdoc.org/d/com.lambdaisland/hiccup) [![Clojars Project](https://img.shields.io/clojars/v/com.lambdaisland/hiccup.svg)](https://clojars.org/com.lambdaisland/hiccup) 
 <!-- /badges -->
 
 Enlive-backed Hiccup implementation (clj-only)
