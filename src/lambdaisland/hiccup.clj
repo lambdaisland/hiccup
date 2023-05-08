@@ -8,6 +8,27 @@
             [garden.compiler :as gc]
             [clojure.string :as str]))
 
+(def kebab-case-tags
+  ;; from https://github.com/preactjs/preact-compat/issues/222
+  #{;; html
+    :accept-charset :http-equiv
+    ;; svg
+    :accent-height :alignment-baseline :arabic-form :baseline-shift :cap-height
+    :clip-path :clip-rule :color-interpolation :color-interpolation-filters
+    :color-profile :color-rendering :fill-opacity :fill-rule :flood-color
+    :flood-opacity :font-family :font-size :font-size-adjust :font-stretch
+    :font-style :font-variant :font-weight :glyph-name
+    :glyph-orientation-horizontal :glyph-orientation-vertical :horiz-adv-x
+    :horiz-origin-x :marker-end :marker-mid :marker-start :overline-position
+    :overline-thickness :panose-1 :paint-order :stop-color :stop-opacity
+    :strikethrough-position :strikethrough-thickness :stroke-dasharray
+    :stroke-dashoffset :stroke-linecap :stroke-linejoin :stroke-miterlimit
+    :stroke-opacity :stroke-width :text-anchor :text-decoration :text-rendering
+    :underline-position :underline-thickness :unicode-bidi :unicode-range
+    :units-per-em :v-alphabetic :v-hanging :v-ideographic :v-mathematical
+    :vert-adv-y :vert-origin-x :vert-origin-y :word-spacing :writing-mode
+    :x-height})
+
 (def block-level-tag?
   #{:head :body :meta :title :script :svg :iframe :style
     :link :address :article :aside :blockquote :details
@@ -16,6 +37,14 @@
 
 (defn- attr-map? [node-spec]
   (and (map? node-spec) (not (keyword? (:tag node-spec)))))
+
+(defn- keep-kebab-case? [k]
+  (or (contains? kebab-case-tags k)
+      (str/starts-with? (name k) "data-")
+      (str/starts-with? (name k) "aria-")))
+
+(defn- camel-case [k]
+  (keyword (str/replace (name k) #"-(\w)" (fn [[_ match]] (str/capitalize match)))))
 
 (defn- nodify [node-spec {:keys [newlines?] :as opts}]
   (cond
@@ -43,6 +72,15 @@
                              (into {} (filter val m))
                              {})
                     :content (enlive/flatmap #(nodify % opts) (if (attr-map? m) ms more))}
+              node (update node :attrs
+                           (fn [attrs]
+                             (->> attrs
+                                  (map (fn [[k v]]
+                                         [(if (keep-kebab-case? k)
+                                            k
+                                            (camel-case k))
+                                          v]))
+                                  (into {}))))
               node (if id (assoc-in node [:attrs :id] id) node)
               node (if (seq classes)
                      (update-in node

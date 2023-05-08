@@ -32,4 +32,13 @@
            "<body><main><article><p></p></article></main></body>")))
   (testing "autoescaping"
     (is (= (hiccup/render [:div "<p></p>"] {:doctype? false})
-           "<div>&lt;p&gt;&lt;/p&gt;</div>"))))
+           "<div>&lt;p&gt;&lt;/p&gt;</div>")))
+  (testing "camelCases attributes"
+    (is (= (hiccup/render [:div {:foo-bar "baz"}] {:doctype? false})
+           "<div fooBar=\"baz\"></div>")))
+  (testing "keeps data-* attributes as kebab-case"
+    (is (= (hiccup/render [:div {:data-foo "bar"}] {:doctype? false})
+           "<div data-foo=\"bar\"></div>")))
+  (testing "keeps certain http and svg attributes as kebab-case"
+    (is (= (hiccup/render [:div {:font-family "Arial"}] {:doctype? false})
+           "<div font-family=\"Arial\"></div>"))))

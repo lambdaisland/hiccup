@@ -1,7 +1,7 @@
 # hiccup
 
 <!-- badges -->
-[![CircleCI](https://circleci.com/gh/lambdaisland/hiccup.svg?style=svg)](https://circleci.com/gh/lambdaisland/hiccup) [![cljdoc badge](https://cljdoc.org/badge/com.lambdaisland/hiccup)](https://cljdoc.org/d/com.lambdaisland/hiccup) [![Clojars Project](https://img.shields.io/clojars/v/com.lambdaisland/hiccup.svg)](https://clojars.org/com.lambdaisland/hiccup) 
+[![CircleCI](https://circleci.com/gh/lambdaisland/hiccup.svg?style=svg)](https://circleci.com/gh/lambdaisland/hiccup) [![cljdoc badge](https://cljdoc.org/badge/com.lambdaisland/hiccup)](https://cljdoc.org/d/com.lambdaisland/hiccup) [![Clojars Project](https://img.shields.io/clojars/v/com.lambdaisland/hiccup.svg)](https://clojars.org/com.lambdaisland/hiccup)
 <!-- /badges -->
 
 Enlive-backed Hiccup implementation (clj-only)
@@ -13,6 +13,7 @@ Enlive-backed Hiccup implementation (clj-only)
 - Components (`[my-fn ...]`)
 - Style maps (`[:div {:style {:color "blue"}}]`)
 - Insert pre-rendered HTML with `[::hiccup/unsafe-html "your html"]`
+- Convert attributes to camelCase, except those HTML + SVG expects to remain kebab-case (`data-*, aria-*, accept-charset...`)
 
 This makes it behave closer to how Hiccup works in Reagent, reducing cognitive
 overhead when doing cross-platform development.
