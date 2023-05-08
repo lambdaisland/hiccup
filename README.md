@@ -13,7 +13,7 @@ Enlive-backed Hiccup implementation (clj-only)
 - Components (`[my-fn ...]`)
 - Style maps (`[:div {:style {:color "blue"}}]`)
 - Insert pre-rendered HTML with `[::hiccup/unsafe-html "your html"]`
-- Convert attributes to camelCase, except those HTML + SVG expects to remain kebab-case (`data-*, aria-*, accept-charset...`)
+- Convert attributes to camelCase, except `"strings"` and those HTML + SVG expects to remain kebab-case (`data-*, aria-*, accept-charset...`)
 
 This makes it behave closer to how Hiccup works in Reagent, reducing cognitive
 overhead when doing cross-platform development.

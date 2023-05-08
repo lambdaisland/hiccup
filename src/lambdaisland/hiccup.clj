@@ -76,9 +76,10 @@
                            (fn [attrs]
                              (->> attrs
                                   (map (fn [[k v]]
-                                         [(if (keep-kebab-case? k)
-                                            k
-                                            (camel-case k))
+                                         [(cond
+                                            (string? k) k
+                                            (keep-kebab-case? k) k
+                                            :else (camel-case k))
                                           v]))
                                   (into {}))))
               node (if id (assoc-in node [:attrs :id] id) node)
