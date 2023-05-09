@@ -44,4 +44,7 @@
            "<div font-family=\"Arial\"></div>")))
   (testing "keeps string attributes as is"
     (is (= (hiccup/render [:div {"foo-bar" "baz"}] {:doctype? false})
-           "<div foo-bar=\"baz\"></div>"))))
+           "<div foo-bar=\"baz\"></div>")))
+  (testing "camelCase attributes remain as is"
+    (is (= (hiccup/render [:div {:camelCase "foo"}] {:doctype? false})
+           "<div camelCase=\"foo\"></div>"))))
