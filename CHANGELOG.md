@@ -6,8 +6,6 @@
 
 ## Changed
 
-# 0.0.!! (2023-05-08 / ???)
-
 - Convert attributes to camelCase, except strings, data-*, aria-* and certain html and svg attributes that are expected to be kebab-case
 
 # 0.0.15 (2023-03-20 / c0a2d53)
