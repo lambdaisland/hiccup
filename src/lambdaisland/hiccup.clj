@@ -89,7 +89,7 @@
         (= :<> tag)
         (enlive/flatmap #(nodify % opts) more)
 
-        (keyword? tag)
+        (or (keyword? tag) (symbol? tag) (string? tag))
         (let [[tag-name & segments] (.split (name tag) "(?=[#.])")
               id (some (fn [^String seg]
                          (when (= \# (.charAt seg 0)) (subs seg 1))) segments)
