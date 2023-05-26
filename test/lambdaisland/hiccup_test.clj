@@ -79,10 +79,7 @@
 ;borrowed from Hiccup:
 
 (defmacro html [& body]
-  `(hiccup/render ~@body {:doctype? false})
-  )
-
-(macroexpand-1 '(html [:test]))
+  `(hiccup/render ~@body {:doctype? false}))
 
 (deftest tag-names
   (testing "basic tags"
