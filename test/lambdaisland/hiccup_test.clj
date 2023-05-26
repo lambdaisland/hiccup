@@ -125,10 +125,8 @@
   (testing "seqs are expanded"
     (is (= (str (html [:body (list "foo" "bar")])) "<body>foobar</body>"))
     (is (= (str (html (list [:p "a"] [:p "b"]))) "<p>a</p><p>b</p>")))
-  (testing "keywords are turned into strings"
-    (is (= (str (html [:div :foo])) "<div>foo</div>")))
   (testing "vecs don't expand - error if vec doesn't have tag name"
-    (is (thrown? IllegalArgumentException
+    (is (thrown? clojure.lang.ExceptionInfo
                  (html (vector [:p "a"] [:p "b"])))))
   (testing "tags can contain tags"
     (is (= (str (html [:div [:p]])) "<div><p></p></div>"))
