@@ -107,7 +107,8 @@
                                   (map (fn [[k v]]
                                          [(convert-attribute k) v]))
                                   (into {}))))
-              node (if id (assoc-in node [:attrs :id] id) node)
+             node (if (and id (not (contains? (:attrs node) :id))) 
+                     (assoc-in node [:attrs :id] id) node)
               node (if (seq classes)
                      (update-in node
                                 [:attrs "class"]
