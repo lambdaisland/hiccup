@@ -97,7 +97,7 @@
     (is (= (str (html [:div.a.b])) "<div class=\"a b\"></div>"))
     (is (= (str (html [:div.a.b.c])) "<div class=\"a b c\"></div>"))
     (is (= (str (html [:div#foo.bar.baz]))
-           "<div class=\"bar baz\" id=\"foo\"></div>"))))
+           "<div id=\"foo\" class=\"bar baz\"></div>"))))
 
 (deftest tag-contents
   (testing "empty tags"
@@ -163,11 +163,11 @@
   (testing "map attributes"
     (is (= (str (html [:span {:style {:background-color :blue, :color "red",
                                       :line-width 1.2, :opacity "100%"}} "foo"]))
-           "<span style=\"background-color:blue;color:red;line-width:1.2;opacity:100%;\">foo</span>")))
+           "<span style=\"background-color: blue;\n  color: red;\n  line-width: 1.2;\n  opacity: 100%;\">foo</span>"))) ;format tweaked from original to match our format
   (testing "resolving conflicts between attributes in the map and tag"
     (is (= (str (html [:div.foo {:class "bar"} "baz"]))
            "<div class=\"foo bar\">baz</div>"))
     (is (= (str (html [:div.foo {:class ["bar"]} "baz"]))
            "<div class=\"foo bar\">baz</div>"))
     (is (= (str (html [:div#bar.foo {:id "baq"} "baz"]))
-           "<div class=\"foo\" id=\"baq\">baz</div>"))))
+           "<div id=\"baq\" class=\"foo\">baz</div>")))) ;swapped order from original test
