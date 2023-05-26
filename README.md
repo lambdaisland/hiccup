@@ -47,12 +47,14 @@ or add the following to your `project.clj` ([Leiningen](https://leiningen.org/))
 We try to minimize differences between Lambda Island Hiccup and Reagent, first
 and foremost. Whenver possible, we try to minimize differences between between Lambda Island Hiccup and the original Hiccup as well.
 
-There are no known semantic differences, but there are some minor differences if
-you are comparing the output character-for-character:
+There are no known semantic differences in the resulting HTML, but there are some minor differences if
+you are comparing the output character-for-character and one runtime
+difference:
 
-* When the tag name has attributes and there's an attribute map, Attributes may appear in a different order.
+* When attributes are specified in both the tag name and a map, attributes may appear in a different order.
+* The CSS in `style` attributes has different whitespace.
 * Illegal tags throw `clojure.lang.ExceptionInfo`, instead of
-    `IllegalArgumentException`, as in Hiccup, or AssertionError, as in Reagent.
+    `IllegalArgumentException`, as in Hiccup, or `AssertionError`, as in Reagent.
 
 
 <!-- opencollective -->
