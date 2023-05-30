@@ -33,18 +33,33 @@
   (testing "autoescaping"
     (is (= (hiccup/render [:div "<p></p>"] {:doctype? false})
            "<div>&lt;p&gt;&lt;/p&gt;</div>")))
-  (testing "camelCases attributes"
-    (is (= (hiccup/render [:div {:foo-bar "baz"}] {:doctype? false})
-           "<div fooBar=\"baz\"></div>")))
-  (testing "keeps data-* attributes as kebab-case"
-    (is (= (hiccup/render [:div {:data-foo "bar"}] {:doctype? false})
-           "<div data-foo=\"bar\"></div>")))
-  (testing "keeps certain http and svg attributes as kebab-case"
-    (is (= (hiccup/render [:div {:font-family "Arial"}] {:doctype? false})
-           "<div font-family=\"Arial\"></div>")))
-  (testing "keeps string attributes as is"
-    (is (= (hiccup/render [:div {"foo-bar" "baz"}] {:doctype? false})
-           "<div foo-bar=\"baz\"></div>")))
-  (testing "camelCase attributes remain as is"
-    (is (= (hiccup/render [:div {:camelCase "foo"}] {:doctype? false})
-           "<div camelCase=\"foo\"></div>"))))
+
+  (testing "attribute conversion"
+    ;; convert kebab-case and camelCase attributes
+    ;; based on behaviour of using Reagent + React
+    ;; except, don't force lowercase (the * below)
+    (doseq [[input expected]
+            {"tabIndex" "tabIndex" ;; *
+             "dataA" "dataA"
+             "fontStyle" "font-style"
+
+             "tab-index" "tab-index"
+             "data-b" "data-b"
+             "font-variant" "font-variant"
+
+             :tabIndex "tabIndex" ;; *
+             :dataD "dataD"
+             :fontStretch "font-stretch"
+
+             :tab-index "tabIndex" ;; *
+             :data-c "data-c"
+             :font-weight "font-weight"
+
+             :hx-foo "hx-foo"
+             "hx-foo" "hx-foo"}]
+      (testing (str (pr-str input) "->" (pr-str expected))
+        (is (= expected
+               (hiccup/convert-attribute input)))
+        (is (= (str "<div " expected "=\"baz\"></div>")
+               (hiccup/render [:div {input "baz"}]
+                              {:doctype? false})))))))
