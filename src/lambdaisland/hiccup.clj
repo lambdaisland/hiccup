@@ -63,8 +63,8 @@
 (defn convert-attribute-react-logic
   [attr-str]
   (let [kebab-str (camel->kebab attr-str)]
-    ;; not use kebab-in-html? here b/c
-    ;; React does not convert ariaFoo to aria-foo
+    ;; not using kebab-in-html? here because
+    ;; React does not convert dataFoo to data-foo
     ;; but does convert fontStretch to font-stretch
     (if (kebab-case-tags kebab-str)
       kebab-str
