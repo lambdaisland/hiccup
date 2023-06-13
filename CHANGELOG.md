@@ -6,7 +6,22 @@
 
 ## Changed
 
-- Convert attributes to camelCase, except strings, data-*, aria-* and certain html and svg attributes that are expected to be kebab-case
+- Convert multi-word attributes to match Reagent + React's behaviour.
+
+  data-, aria-, and hx- attributes remain kebab-case.
+  html and svg attributes that are kebab-case in those specs, are converted to kebab-case
+
+  BREAKING in some cases:
+
+    Previously:
+    :tab-index -> "tab-index"
+    "fontStyle" -> "fontStyle"
+    :fontStyle -> "fontStyle"
+
+    Now:
+    :tab-index -> "tabIndex"
+    "fontStyle" -> "font-style"
+    :fontStyle -> "font-style"
 
 # 0.0.15 (2023-03-20 / c0a2d53)
 
