@@ -110,7 +110,7 @@
               node (if id (assoc-in node [:attrs :id] id) node)
               node (if (seq classes)
                      (update-in node
-                                [:attrs :class]
+                                [:attrs "class"]
                                 (fn [kls]
                                   (concat classes (if (string? kls) [kls] kls))))
                      node)]
