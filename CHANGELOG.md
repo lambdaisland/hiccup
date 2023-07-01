@@ -6,6 +6,8 @@
 
 ## Changed
 
+- Fix rendering of classes specified in tags
+
 # 0.0.25 (2023-06-16 / 7c4925e)
 
 ## Added
