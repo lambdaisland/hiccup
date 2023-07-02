@@ -4,9 +4,9 @@
 
 ## Fixed
 
-## Changed
-
 - Fix rendering of classes specified in tags
+
+## Changed
 
 # 0.0.25 (2023-06-16 / 7c4925e)
 
