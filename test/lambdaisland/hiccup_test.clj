@@ -34,6 +34,19 @@
     (is (= (hiccup/render [:div "<p></p>"] {:doctype? false})
            "<div>&lt;p&gt;&lt;/p&gt;</div>")))
 
+  (testing "classes in tags"
+    (is (= (hiccup/render [:div.foo] {:doctype? false})
+           "<div class=\"foo\"></div>"))
+
+    (is (= (hiccup/render [:div.foo.bar] {:doctype? false})
+           "<div class=\"foo bar\"></div>"))
+
+    (is (= (hiccup/render [:div.foo {:class "bar"}] {:doctype? false})
+           "<div class=\"foo bar\"></div>"))
+
+    (is (= (hiccup/render [:div.foo {:class "foo"}] {:doctype? false})
+           "<div class=\"foo foo\"></div>")))
+
   (testing "attribute conversion"
     ;; convert kebab-case and camelCase attributes
     ;; based on behaviour of using Reagent + React
