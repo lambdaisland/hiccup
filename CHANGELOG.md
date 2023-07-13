@@ -8,19 +8,11 @@
 
 # 0.0.33 (2023-07-03 / 7aa06c6)
 
-## Added
-
 ## Fixed
 
 - Fix rendering of classes specified in tags
 
-## Changed
-
 # 0.0.25 (2023-06-16 / 7c4925e)
-
-## Added
-
-## Fixed
 
 ## Changed
 
@@ -42,8 +34,6 @@
     :fontStyle -> "font-style"
 
 # 0.0.15 (2023-03-20 / c0a2d53)
-
-## Added
 
 ## Fixed
 
