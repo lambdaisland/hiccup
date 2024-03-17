@@ -1,3 +1,11 @@
+# Unreleased
+
+## Added
+
+## Fixed
+
+## Changed
+
 # 0.7.42 (2024-03-17 / 52532f5)
 
 ## Changed
