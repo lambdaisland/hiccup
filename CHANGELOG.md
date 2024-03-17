@@ -1,10 +1,8 @@
 # Unreleased
 
-## Added
-
-## Fixed
-
 ## Changed
+
+- switch to `com.lambdaisland/garden`
 
 # 0.0.33 (2023-07-03 / 7aa06c6)
 
