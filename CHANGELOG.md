@@ -1,10 +1,8 @@
 # Unreleased
 
-## Added
-
-## Fixed
-
 ## Changed
+
+- bump garden
 
 # 0.6.39 (2024-03-17 / b3b2b6c)
 
