@@ -38,11 +38,12 @@
 (defn- attr-map? [node-spec]
   (and (map? node-spec) (not (keyword? (:tag node-spec)))))
 
+(defonce kebap-prefixes (atom #{"data-" "aria-" "hx-"}))
+
 (defn- kebab-in-html? [attr-str]
   (or (contains? kebab-case-tags attr-str)
-      (str/starts-with? attr-str "data-")
-      (str/starts-with? attr-str "aria-")
-      (str/starts-with? attr-str "hx-")))
+      (some #(str/starts-with? attr-str %)
+            @kebap-prefixes)))
 
 (defn- kebab->camel [s]
   (str/replace s #"-(\w)" (fn [[_ match]] (str/capitalize match))))

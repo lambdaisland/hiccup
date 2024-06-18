@@ -1,3 +1,3 @@
 {:deps
  {lambdaisland/open-source {:git/url "https://github.com/lambdaisland/open-source"
-                            :git/sha "a6d39720fe8948d79b822384de054ee6e1912599"}}}
+                            :git/sha "4cb6231e7df947ee8f5434e7ad48ffd8e273bcf5"}}}

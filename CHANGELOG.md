@@ -2,9 +2,7 @@
 
 ## Added
 
-## Fixed
-
-## Changed
+- Support custom attribute prefixes that use dashes
 
 # 0.7.42 (2024-03-17 / 52532f5)
 
