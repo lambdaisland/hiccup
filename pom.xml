@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.lambdaisland</groupId>
   <artifactId>hiccup</artifactId>
-  <version>0.7.42</version>
+  <version>0.8.45</version>
   <name>hiccup</name>
   <description>Enlive-backed Hiccup implementation (clj-only)</description>
   <url>https://github.com/lambdaisland/hiccup</url>
@@ -25,7 +25,7 @@
     <url>https://github.com/lambdaisland/hiccup</url>
     <connection>scm:git:git://github.com/lambdaisland/hiccup.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/lambdaisland/hiccup.git</developerConnection>
-    <tag>7a4b792eb7fc7476ae0cef98eddf17b4a9cf1706</tag>
+    <tag>700f3e14c0575c85f8333f60722bd63a14e139fc</tag>
   </scm>
   <dependencies>
     <dependency>
@@ -66,7 +66,7 @@
         <configuration>
           <archive>
             <manifestEntries>
-              <git-revision>7a4b792eb7fc7476ae0cef98eddf17b4a9cf1706</git-revision>
+              <git-revision>700f3e14c0575c85f8333f60722bd63a14e139fc</git-revision>
             </manifestEntries>
           </archive>
         </configuration>

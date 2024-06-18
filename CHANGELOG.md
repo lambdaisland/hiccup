@@ -1,3 +1,11 @@
+# Unreleased
+
+## Added
+
+## Fixed
+
+## Changed
+
 # 0.8.45 (2024-06-18 / 67c75ef)
 
 ## Added
