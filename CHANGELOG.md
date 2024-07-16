@@ -5,6 +5,9 @@
 ## Fixed
 
 ## Changed
+- Normalize spacing in style attr with multiple properties.
+  Where before the generated style attr might have "\n" or "   ",
+  these are all now a simple " ", e.g. in-between multiple CSS properties.
 
 # 0.9.48 (2024-06-18 / e43362c)
 
