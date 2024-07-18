@@ -6,7 +6,7 @@
   <version>0.9.48</version>
   <name>hiccup</name>
   <description>Enlive-backed Hiccup implementation (clj-only)</description>
-  <url>https://github.com/lambdaisland/hiccup</url>
+  <url>https://github.com/wizard-enterprises/hiccup</url>
   <inceptionYear>2021</inceptionYear>
   <organization>
     <name>Lambda Island</name>
@@ -22,9 +22,9 @@
     </license>
   </licenses>
   <scm>
-    <url>https://github.com/lambdaisland/hiccup</url>
-    <connection>scm:git:git://github.com/lambdaisland/hiccup.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/lambdaisland/hiccup.git</developerConnection>
+    <url>https://github.com/wizard-enterprises/hiccup</url>
+    <connection>scm:git:git://github.com/wizard-enterprises/hiccup.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/wizard-enterprises/hiccup.git</developerConnection>
     <tag>3067dbe7b78fa47537be7766d91b122055b881bd</tag>
   </scm>
   <dependencies>
