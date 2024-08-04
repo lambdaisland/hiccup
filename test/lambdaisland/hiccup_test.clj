@@ -38,14 +38,38 @@
     (is (= (hiccup/render [:div.foo] {:doctype? false})
            "<div class=\"foo\"></div>"))
 
+    (testing "without tag"
+      (is (= (hiccup/render [:.foo] {:doctype? false})
+             "<div class=\"foo\"></div>")))
+
     (is (= (hiccup/render [:div.foo.bar] {:doctype? false})
            "<div class=\"foo bar\"></div>"))
 
-    (is (= (hiccup/render [:div.foo {:class "bar"}] {:doctype? false})
-           "<div class=\"foo bar\"></div>"))
+    (testing "with attr overrides"
+      (is (= (hiccup/render [:div.foo {:class "bar"}] {:doctype? false})
+             "<div class=\"foo bar\"></div>"))
 
-    (is (= (hiccup/render [:div.foo {:class "foo"}] {:doctype? false})
-           "<div class=\"foo foo\"></div>")))
+      (is (= (hiccup/render [:div.foo {:class "foo"}] {:doctype? false})
+             "<div class=\"foo foo\"></div>"))))
+
+  (testing "ids in tags"
+    (is (= (hiccup/render [:div#foo] {:doctype? false})
+           "<div id=\"foo\"></div>"))
+
+    (testing "without tag"
+      (is (= (hiccup/render [:#foo] {:doctype? false})
+             "<div id=\"foo\"></div>")))
+
+    (testing "with attr override"
+      (is (= (hiccup/render [:div#foo {:id "bar"}] {:doctype? false})
+             "<div id=\"bar\"></div>")))
+
+    (testing "works before or after classes in tag"
+      (is (= (hiccup/render [:div#foo.bar] {:doctype? false})
+             "<div id=\"foo\" class=\"bar\"></div>"))
+
+      (is (= (hiccup/render [:div.bar#foo] {:doctype? false})
+             "<div id=\"foo\" class=\"bar\"></div>"))))
 
   (testing "attribute conversion"
     ;; convert kebab-case and camelCase attributes

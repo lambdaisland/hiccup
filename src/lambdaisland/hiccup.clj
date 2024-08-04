@@ -91,16 +91,20 @@
         (enlive/flatmap #(nodify % opts) more)
 
         (keyword? tag)
-        (let [[tag-name & segments] (.split (name tag) "(?=[#.])")
+        (let [tag (name tag)
+              tag (if (let [c (first tag)] (or (= \. c) (= \# c)))
+                    (str "div" tag) tag)
+              [tag-name & segments] (.split tag "(?=[#.])")
+
               id (some (fn [^String seg]
                          (when (= \# (.charAt seg 0)) (subs seg 1))) segments)
               classes (keep (fn [^String seg]
                               (when (= \. (.charAt seg 0)) (subs seg 1)))
                             segments)
-              node {:tag (keyword tag-name)
-                    :attrs (if (attr-map? m)
-                             (into {} (filter val m))
-                             {})
+              node {:tag     (keyword tag-name)
+                    :attrs   (if (attr-map? m)
+                               (into {} (filter val m))
+                               {})
                     :content (enlive/flatmap #(nodify % opts) (if (attr-map? m) ms more))}
               node (update node :attrs
                            (fn [attrs]
@@ -108,7 +112,8 @@
                                   (map (fn [[k v]]
                                          [(convert-attribute k) v]))
                                   (into {}))))
-              node (if id (assoc-in node [:attrs :id] id) node)
+              node (cond-> node (and id (not (contains? (:attrs node) "id")))
+                           (assoc-in [:attrs "id"] id))
               node (if (seq classes)
                      (update-in node
                                 [:attrs "class"]
