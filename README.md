@@ -14,6 +14,7 @@ Enlive-backed Hiccup implementation (clj-only)
 - Style maps (`[:div {:style {:color "blue"}}]`)
 - Insert pre-rendered HTML with `[::hiccup/unsafe-html "your html"]`
 - Convert multi-word attributes to the appropriate case, matching Reagent + React's behaviour (`:tab-index -> "tabIndex"`; `"fontStyle" -> "font-style"`); you should be able to use `:kebab-case` keywords and get what you expect
+- `wrap-render` Ring middleware with content negotiation
 
 These features make its behavior closely follow how Hiccup works in Reagent, reducing cognitive
 overhead when doing cross-platform development.

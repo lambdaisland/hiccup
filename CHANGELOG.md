@@ -2,9 +2,7 @@
 
 ## Added
 
-## Fixed
-
-## Changed
+- Add `wrap-render`, a middleware for rendering HTML with content negotiation
 
 # 0.9.48 (2024-06-18 / e43362c)
 
