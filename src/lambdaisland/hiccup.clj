@@ -120,6 +120,7 @@
             (update-in [:attrs "style"] (fn [style]
                                           (-> (gc/compile-css [:& style])
                                               (str/replace #"^\s*\{|\}\s*$" "")
+                                              (str/replace #"[ \n]+" " ")
                                               str/trim)))
             (sequential? (get-in node [:attrs "class"]))
             (update-in [:attrs "class"] #(str/join " " %))
