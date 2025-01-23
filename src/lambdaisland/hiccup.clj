@@ -38,7 +38,7 @@
 (defn- attr-map? [node-spec]
   (and (map? node-spec) (not (keyword? (:tag node-spec)))))
 
-(defonce kebab-prefixes (atom #{"data-" "aria-" "hx-"}))
+(defonce kebab-prefixes (atom #{"data-" "aria-" "hx-" "ss-"}))
 
 (defn- kebab-in-html? [attr-str]
   (or (contains? kebab-case-tags attr-str)
