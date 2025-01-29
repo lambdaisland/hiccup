@@ -1,10 +1,7 @@
 # Unreleased
 
-## Added
-
-## Fixed
-
 ## Changed
+
 - Normalize spacing in style attr with multiple properties.
   Where before the generated style attr might have "\n" or "   ",
   these are all now a simple " ", e.g. in-between multiple CSS properties.
