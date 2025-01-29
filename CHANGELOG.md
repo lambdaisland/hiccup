@@ -2,9 +2,9 @@
 
 ## Added
 
-## Fixed
-
-## Changed
+- Add multimethod `convert-attr-value` to support custom rendering per attribute key
+- Add support for setting `lambdaisland.hiccup.kebab-prefixes` via a system
+  property (comma or space separated)
 
 # 0.11.55 (2025-01-23 / e4ad3aa)
 

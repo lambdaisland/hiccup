@@ -38,7 +38,23 @@
 (defn- attr-map? [node-spec]
   (and (map? node-spec) (not (keyword? (:tag node-spec)))))
 
-(defonce kebab-prefixes (atom #{"data-" "aria-" "hx-" "ss-"}))
+(defonce
+  ^{:doc
+    "Prefixes which retain their kebab-case in HTML, rather than having their
+  dashes removed, which is the default behavior. E.g. `:on-click` =>
+  `\"onclick\"` vs `:data-foo` => `\"data-foo\"`. Can be `swap!`-ed at runtime,
+  or set at boot with the `lambdaisland.hiccup.kebab-prefixes` Java system
+  property."}
+  kebab-prefixes
+  (atom (into #{"data-" "aria-"
+                ;; HTMX
+                "hx-"
+                ;; HTMX websocket extension
+                "ws-"
+                ;; HTMX server sent events extension
+                "sse-"}
+              (when-let [p (System/getProperty "lambdaisland.hiccup.kebab-prefixes")]
+                (str/split p #"[\s,]+")))))
 
 (defn- kebab-in-html? [attr-str]
   (or (contains? kebab-case-tags attr-str)
@@ -76,6 +92,21 @@
        convert-attribute-reagent-logic
        convert-attribute-react-logic))
 
+(defmulti convert-attr-value (fn [attr-key attr-val] attr-key))
+(defmethod convert-attr-value :default [_ attr-val] attr-val)
+
+(defmethod convert-attr-value "style" [_ style]
+  (if (map? style)
+    (-> (gc/compile-css [:& style])
+        (str/replace #"^\s*\{|\}\s*$" "")
+        str/trim)
+    style))
+
+(defmethod convert-attr-value "class" [_ klz]
+  (if (sequential? klz)
+    (str/join " " klz)
+    klz))
+
 (defn- nodify [node-spec {:keys [newlines?] :as opts}]
   (cond
     (string? node-spec) node-spec
@@ -97,34 +128,26 @@
               classes (keep (fn [^String seg]
                               (when (= \. (.charAt seg 0)) (subs seg 1)))
                             segments)
+              attrs (if (attr-map? m)
+                      (into {}
+                            (comp
+                             (filter val)
+                             (map (fn [[k v]] [(convert-attribute k) v])))
+                            m)
+                      {})
+              attrs (cond-> attrs
+                      id
+                      (assoc "id" id)
+                      (seq classes)
+                      (update "class" (fn [kls]
+                                        (concat classes (if (string? kls) [kls] kls)))))
+              attrs (into {} (map (fn [[k v]] [k (convert-attr-value k v)])) attrs)
               node {:tag (keyword tag-name)
-                    :attrs (if (attr-map? m)
-                             (into {} (filter val m))
-                             {})
-                    :content (enlive/flatmap #(nodify % opts) (if (attr-map? m) ms more))}
-              node (update node :attrs
-                           (fn [attrs]
-                             (->> attrs
-                                  (map (fn [[k v]]
-                                         [(convert-attribute k) v]))
-                                  (into {}))))
-              node (if id (assoc-in node [:attrs :id] id) node)
-              node (if (seq classes)
-                     (update-in node
-                                [:attrs "class"]
-                                (fn [kls]
-                                  (concat classes (if (string? kls) [kls] kls))))
-                     node)]
-          (cond-> node
-            (map? (get-in node [:attrs "style"]))
-            (update-in [:attrs "style"] (fn [style]
-                                          (-> (gc/compile-css [:& style])
-                                              (str/replace #"^\s*\{|\}\s*$" "")
-                                              str/trim)))
-            (sequential? (get-in node [:attrs "class"]))
-            (update-in [:attrs "class"] #(str/join " " %))
+                    :attrs attrs
+                    :content (enlive/flatmap #(nodify % opts) (if (attr-map? m) ms more))}]
+          (cond->> node
             (and newlines? (block-level-tag? tag))
-            (->> (list "\n"))))
+            (list "\n")))
 
         (or (fn? tag) (= :lambdaisland.ornament/styled (type tag)))
         (nodify (apply tag more) opts)
