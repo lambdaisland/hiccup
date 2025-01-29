@@ -1,4 +1,4 @@
-# Unreleased
+# 0.12.59 (2025-01-29 / d1e76bd)
 
 ## Added
 
