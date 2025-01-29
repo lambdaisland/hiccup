@@ -25,13 +25,13 @@ overhead when doing cross-platform development.
 To use the latest release, add the following to your `deps.edn` ([Clojure CLI](https://clojure.org/guides/deps_and_cli))
 
 ```
-com.lambdaisland/hiccup {:mvn/version "0.12.59"}
+com.lambdaisland/hiccup {:mvn/version "0.13.64"}
 ```
 
 or add the following to your `project.clj` ([Leiningen](https://leiningen.org/))
 
 ```
-[com.lambdaisland/hiccup "0.12.59"]
+[com.lambdaisland/hiccup "0.13.64"]
 ```
 <!-- /installation -->
 
