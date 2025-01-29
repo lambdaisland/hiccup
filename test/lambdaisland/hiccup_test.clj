@@ -1,4 +1,3 @@
-
 (ns lambdaisland.hiccup-test
   (:require [clojure.test :refer [deftest testing is]]
             [lambdaisland.hiccup :as hiccup]))
@@ -19,8 +18,9 @@
     (is (= (hiccup/render [:div [:p]] {:doctype? false})
            "<div><p></p></div>")))
   (testing "styled tag"
-    (is (= (hiccup/render [:div {:style {:color "blue"}} [:p]] {:doctype? false})
-           "<div style=\"color: blue;\"><p></p></div>")))
+    (let [style {:color "blue" :border "black"}]
+      (is (= (hiccup/render [:div {:style style} [:p]] {:doctype? false})
+           "<div style=\"color: blue; border: black;\"><p></p></div>"))))
   (testing "simple component"
     (is (= (hiccup/render [my-test-component "hello"] {:doctype? false})
            "<p>hello</p>")))

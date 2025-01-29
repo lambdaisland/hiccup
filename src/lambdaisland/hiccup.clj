@@ -99,6 +99,7 @@
   (if (map? style)
     (-> (gc/compile-css [:& style])
         (str/replace #"^\s*\{|\}\s*$" "")
+        (str/replace #"[ \n]+" " ")
         str/trim)
     style))
 
