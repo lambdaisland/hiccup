@@ -150,7 +150,7 @@
             (and newlines? (block-level-tag? tag))
             (list "\n")))
 
-        (or (fn? tag) (= :lambdaisland.ornament/styled (type tag)))
+        (or (fn? tag) (= :lambdaisland.ornament/styled (type tag)) (instance? clojure.lang.MultiFn tag))
         (nodify (apply tag more) opts)
 
         :else

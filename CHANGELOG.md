@@ -2,9 +2,7 @@
 
 ## Added
 
-## Fixed
-
-## Changed
+- Added support for using multimethods as tags in hiccup expressions
 
 # 0.13.64 (2025-01-29 / 82eaa64)
 
